@@ -25,6 +25,12 @@
 
 1. use `localhost:3333/healthcheck\?password=test` to access the system securely now
 
+1. Create a route that is used to return a list of cards with similar names
+
+1. `curl localhost:3333/cards\?password`
+
+1. Create an interface for the respository we want to use to get these cards
+
 1. Create a repository package that connects to the postgres database and returns a list of cards based on likeness search on the card name
 
 
