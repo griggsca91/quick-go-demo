@@ -5,20 +5,24 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/griggsca91/quick-go-demo/repository"
-	"github.com/griggsca91/quick-go-demo/repository/cards"
 )
 
 func main() {
 
 	fmt.Println("Hello world")
 
+	databaseURL := os.Getenv("DATABASE_URL")
+
+	cardsRepo, err := repository.NewPostgresRepository(databaseURL)
+	if err != nil {
+		panic(err)
+	}
+
 	router := chi.NewRouter()
-
-	var cardsRepo cards.CardRepository = repository.NewPostgresRepository()
-
 	router.Use(func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			queryParams := r.URL.Query()

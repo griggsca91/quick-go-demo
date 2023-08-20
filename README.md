@@ -33,9 +33,12 @@
 
 1. Create a repository package that connects to the postgres database and returns a list of cards based on likeness search on the card name
 
+1. Import `github.com/jackc/pgx/v5` and create a pool to pass in to the repository impl
+
 
 ## Next steps to look at
 
 1. Look at `gRPC`
 1. Look at `https://github.com/mitranim/gow` for file watching and rebuilding on file changes
 1. Look at `https://github.com/mvdan/gofumpt`
+1. Code review advice for reviewing go code - `https://github.com/golang/go/wiki/CodeReviewComments#receiver-type`
