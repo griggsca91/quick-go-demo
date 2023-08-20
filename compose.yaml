@@ -8,6 +8,7 @@ services:
       - '5432:5432'
     volumes:
       - db:/var/lib/postgresql/data
+      - ./sql/cards.sql.gz:/docker-entrypoint-initdb.d/cards.sql.gz
 volumes:
   db:
     driver: local
