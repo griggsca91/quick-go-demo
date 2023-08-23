@@ -3,23 +3,33 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"fmt"
+	"flag"
 	"net/http"
 	"os"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/griggsca91/quick-go-demo/repository"
+	"github.com/griggsca91/quick-go-demo/repository/cards"
 )
 
 func main() {
 
-	fmt.Println("Hello world")
+	repo := flag.String("repo", "fake", "choose which repo to use")
 
-	databaseURL := os.Getenv("DATABASE_URL")
+	flag.Parse()
 
-	cardsRepo, err := repository.NewPostgresRepository(databaseURL)
-	if err != nil {
-		panic(err)
+	var cardsRepo cards.CardRepository
+
+	if *repo != "fake" {
+		databaseURL := os.Getenv("DATABASE_URL")
+
+		var err error
+		cardsRepo, err = repository.NewPostgresRepository(databaseURL)
+		if err != nil {
+			panic(err)
+		}
+	} else {
+		cardsRepo = repository.NewFakeRepository()
 	}
 
 	router := chi.NewRouter()
